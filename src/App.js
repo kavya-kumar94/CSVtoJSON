@@ -11,11 +11,31 @@ class App extends React.Component {
     }
   };
 
-  // axios.post("http://localhost:8000/upload", data, {
-  // })
-  //     .then(res => {
-  //   console.log(res.statusText)
-  //     })
+processData(allText) {
+  var allTextLines = allText.split("\n");
+  let date = new Date();
+  for (var i = 1; i < allTextLines.length; i++) {
+    var data = allTextLines[i].split(',');
+
+      var result = {
+        "date": date,
+        "cash_raised": 0,
+        "total_number_of_shares": 0,
+        "ownership" :[],
+      };
+      for (var j = 0; j < data.length; j++) {
+        if(j === 0) {
+          result.date = data[0] || date;
+        } else if ( j === 1) {
+          result.cash_raised += data[1];
+        } else if (j === 2) {
+          result.total_number_of_shares += data[2];
+        } else {
+          result.ownership.push(data[3])
+        }
+      }
+  }
+}
 
   maxSelectFile = (event) => {
     let files = event.target.files
@@ -57,18 +77,19 @@ class App extends React.Component {
     }
   }
 
-  onClickHandler = () => {
-    const data = new FormData()
-    data.append('file', this.state.selectedFile)
-  }
+  // onClickHandler = () => {
+  //   const data = new FormData()
+  //   data.append('file', this.state.selectedFile)
+  // }
 
   render() {
+    
     return (
       <div className="App">
         <h2>Upload a CSV file!</h2>
         <input type="file" style={{"width":200}} name="file" onChange={this.onChangeHandler} />
-        <button type="button" className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button> 
-
+        <button type="button" className="btn btn-success btn-block" onClick={this.processData}>Convert to JSON!</button> 
+        {/* <div>{lines}</div> */}
       </div>
     );
   }
