@@ -42,14 +42,6 @@ class App extends React.Component {
     if (err !== '') { 
       event.target.value = null
       alert(err);
-      // return(
-      //   < div className="alert alert-info" role = "alert" >
-      //     <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-      //     < button type = "button" className="close" data-dismiss="alert" aria-label="Close" >
-      //           <span aria-hidden="true">&times;</span>
-      //     </button >
-      //   </div >
-      // )
       return false;
     }
     return true;
@@ -73,6 +65,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <h2>Upload a CSV file!</h2>
         <input type="file" style={{"width":200}} name="file" onChange={this.onChangeHandler} />
         <button type="button" className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button> 
 
