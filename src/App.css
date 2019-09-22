@@ -23,25 +23,25 @@ h2 {
 
 .btn-success {
   border-radius: 500px;
-    padding: 12px 38px 12px;
-    background-color: rgb(29, 125, 185);
-    border: 0px;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    color: white;
-    font-weight: 700;
-    margin-top: 20px;
-    cursor: pointer;
-    width: 20%;
+  padding: 12px 38px 12px;
+  background-color: rgb(29, 125, 185);
+  border: 0px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: white;
+  font-weight: 700;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 20%;
 }
 input {
   border-radius: 500px;
-    padding: 12px 38px 12px;
-    border: 0px;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    margin-top: 20px;
-    outline: none;
-    cursor: pointer;
-    color: rgb(29, 125, 185);
+  padding: 12px 38px 12px;
+  border: 0px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  margin-top: 20px;
+  outline: none;
+  cursor: pointer;
+  color: rgb(29, 125, 185);
 }
