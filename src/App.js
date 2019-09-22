@@ -32,7 +32,7 @@ class App extends React.Component {
   checkMimeType = (event) => {
     let files = event.target.files
     let err = ''
-    const types = ['text/csv']
+    const types = ['text/csv', 'application/csv', 'application / x - csv', 'text/comma-separated-values', 'text/x-comma-separated-values', 'text/tab-separated-values']
     for (var x = 0; x < files.length; x++) {
       if (types.every(type => files[x].type !== type)) {
         err += files[x].type + ' is not a supported format\n';
@@ -41,15 +41,16 @@ class App extends React.Component {
 
     if (err !== '') { 
       event.target.value = null
-      return(
-        < div className="alert alert-info" role = "alert" >
-          <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-          < button type = "button" className="close" data-dismiss="alert" aria-label="Close" >
-                <span aria-hidden="true">&times;</span>
-          </button >
-        </div >
-      )
-      // return false;
+      alert(err);
+      // return(
+      //   < div className="alert alert-info" role = "alert" >
+      //     <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+      //     < button type = "button" className="close" data-dismiss="alert" aria-label="Close" >
+      //           <span aria-hidden="true">&times;</span>
+      //     </button >
+      //   </div >
+      // )
+      return false;
     }
     return true;
 
