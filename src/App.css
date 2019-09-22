@@ -27,7 +27,7 @@
 .btn-success {
   border-radius: 500px;
     padding: 12px 38px 12px;
-    background-color: #1DB954;
+    background-color: rgb(29, 125, 185);
     border: 0px;
     font-size: 12px;
     letter-spacing: 0.2em;
@@ -39,11 +39,9 @@
 input {
   border-radius: 500px;
     padding: 12px 38px 12px;
-    /* background-color: #1DB954; */
     border: 0px;
     font-size: 12px;
     letter-spacing: 0.2em;
-    /* color: white; */
     margin-top: 20px;
-    /* cursor: pointer; */
+    outline: none;
 }
