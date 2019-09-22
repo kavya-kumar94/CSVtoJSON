@@ -7,6 +7,7 @@
 
 h2 {
   letter-spacing: 0.2em;
+  color: rgb(29, 125, 185);
 }
 
 .App-header {
@@ -28,6 +29,7 @@ h2 {
     font-size: 12px;
     letter-spacing: 0.2em;
     color: white;
+    font-weight: 700;
     margin-top: 20px;
     cursor: pointer;
     width: 20%;
@@ -41,4 +43,5 @@ input {
     margin-top: 20px;
     outline: none;
     cursor: pointer;
+    color: rgb(29, 125, 185);
 }

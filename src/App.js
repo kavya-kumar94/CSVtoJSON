@@ -35,7 +35,7 @@ class App extends React.Component {
     const types = ['text/csv', 'application/csv', 'application / x - csv', 'text/comma-separated-values', 'text/x-comma-separated-values', 'text/tab-separated-values']
     for (var x = 0; x < files.length; x++) {
       if (types.every(type => files[x].type !== type)) {
-        err += files[x].type + ' is not a supported format\n';
+        err += files[x].type + ' is not a supported format\n Please upload a .csv file.';
       }
     };
 
