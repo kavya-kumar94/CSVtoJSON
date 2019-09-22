@@ -72,7 +72,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <input type="file" name="file" onChange={this.onChangeHandler} />
+        <input type="file" style={{"width":200}} name="file" onChange={this.onChangeHandler} />
         <button type="button" className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button> 
 
       </div>
