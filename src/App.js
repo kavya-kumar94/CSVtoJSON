@@ -10,7 +10,7 @@ class App extends React.Component {
   };
 
 
-processData() {
+processData = () => {
 
    let x = "2016-04-03,1000,10000.00,Sandy Lerner\n" +
    "2017 - 11 - 14, 1000, 12000.00, Don Valentine\n" +
@@ -69,7 +69,7 @@ processData() {
       "cash_raised": totalCashRaised,
       "ownership": y,
     };
-    return result;
+    console.log(result);
 }
 
 
