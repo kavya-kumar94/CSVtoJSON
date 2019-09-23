@@ -11,64 +11,129 @@ class App extends React.Component {
     }
   };
 
+
 processData() {
 
-  let x = "2016-04-03,1000,10000.00,Sandy Lerner\n" +
-  "2017 - 11 - 14, 1000, 12000.00, Don Valentine\n" +
-  "2018 - 01 - 20, 2000, 40000.00, Don Valentine\n" +
-  "2018 - 03 - 20, 2000, 40000.00, Ann Miura - Ko\n" +
-  "2019 - 01 - 02, 2000, 50000.00, Sandy Lerner\n" +
-  "2019 - 01 - 02, 1500, 13500.00, Fred Wilson\n"
+   let x = "2016-04-03,1000,10000.00,Sandy Lerner\n" +
+   "2017 - 11 - 14, 1000, 12000.00, Don Valentine\n" +
+   "2018 - 01 - 20, 2000, 40000.00, Don Valentine\n" +
+   "2018 - 03 - 20, 2000, 40000.00, Ann Miura - Ko\n" +
+   "2019 - 01 - 02, 2000, 50000.00, Sandy Lerner\n" +
+   "2019 - 01 - 02, 1500, 13500.00, Fred Wilson\n"
 
-  var allTextLines = x.split(/\r?\n/).filter(line => line.length!== 0);
-  let date = new Date();
-  let results = [];
-  
-  for (var i = 0; i < allTextLines.length; i++) {
+   var allTextLines = x.split(/\r?\n/).filter(line => line.length!== 0);
+
+   let listOfOwners = {};
+
+  var totalCashRaised = 0;
+  var totalShares = 0;
+
+  for (var i = 0; i < allTextLines.length; i++){
     var data = allTextLines[i].split(',');
-    var result = {
-      "date": date,
-      "total_number_of_shares": 0,
-      "cash_raised": 0,
-      "ownership": null,
-    };
+    date = data[0];
+    numberOfShares = parseInt(data[1]);
+    cashRaised = parseInt(data[2]);
+    name = data[3].trim();
 
-    var newOwner = {};
-      for (var j = 0; j < data.length; j++) {
-        if(j === 0) {
-          result.date = data[0] || date;
-        } else if ( j === 1) {
-          result.total_number_of_shares = data[1];
-        } else if (j === 2) {
-          result.cash_raised = data[2];
-        } else {
-            newOwner["investor"] = data[3];
-            newOwner["shares"] = data[1];
-            newOwner["cash_paid"] =data[2];
-            newOwner["ownership"] = (newOwner["shares"] / result.total_number_of_shares)
-            result.ownership = (newOwner);
-        }
+    let person = {} 
+    person["date"] = date;
+    person["numberOfShares"] = numberOfShares;
+    person["cashRaised"] = cashRaised;
+    person["name"] = name;
+    person["ownership"] = 0;
 
-      }
-    results.push(result);
-  }
-  let final = {
-    "date": date,
-    "total_number_of_shares": 0,
-    "cash_raised": 0,
-    "ownership": [],
-  };
-  for(let k = 0; k < results.length; k++) {
-    if (results[k].date > final.date) {
-      final.date = results[k].date
+    totalCashRaised = cashRaised + totalCashRaised;
+    totalShares = totalShares + numberOfShares;
+
+    if (listOfOwners[name] !== undefined) {
+      let temp = listOfOwners[name];
+      var shares = person["numberOfShares"] + temp["numberOfShares"];
+      var raised = person["cashRaised"] + temp["cashRaised"];
+      person["numberOfShares"] = shares;
+      person["cashRaised"] = raised;
     }
 
-    final.cash_raised = parseInt(final.cash_raised)+parseInt(results[k].cash_raised);
-    final.total_number_of_shares = parseInt(final.total_number_of_shares) + parseInt(results[k].total_number_of_shares);    
-    final.ownership.push(results[k].ownership);
+    listOfOwners[name] = person;
   }
-  return final;
+
+  let y = Object.values(listOfOwners);
+
+  for(let j = 0; j < y.length; j++) {
+    var owner = y[j];
+    owner["ownership"] = 100 * (owner["numberOfShares"] / totalShares);
+  }
+  
+  let day = new Date();
+  let curr = day.getDay();
+      var result = {
+      "date": curr,
+      "total_number_of_shares": totalShares,
+      "cash_raised": totalCashRaised,
+      "ownership": y,
+    };
+    return result;
 }
+// processData() {
+
+//   let x = "2016-04-03,1000,10000.00,Sandy Lerner\n" +
+//   "2017 - 11 - 14, 1000, 12000.00, Don Valentine\n" +
+//   "2018 - 01 - 20, 2000, 40000.00, Don Valentine\n" +
+//   "2018 - 03 - 20, 2000, 40000.00, Ann Miura - Ko\n" +
+//   "2019 - 01 - 02, 2000, 50000.00, Sandy Lerner\n" +
+//   "2019 - 01 - 02, 1500, 13500.00, Fred Wilson\n"
+
+//   var allTextLines = x.split(/\r?\n/).filter(line => line.length!== 0);
+//   let date = new Date();
+//   let month = date.getMonth();
+//   let day = date.getDay();
+//   let year = date.getFullYear();
+//   let results = [];
+  
+//   for (var i = 0; i < allTextLines.length; i++) {
+//     var data = allTextLines[i].split(',');
+//     var result = {
+//       "date": month/day/year,
+//       "total_number_of_shares": 0,
+//       "cash_raised": 0,
+//       "ownership": null,
+//     };
+
+//     var newOwner = {};
+//       for (var j = 0; j < data.length; j++) {
+//         if(j === 0) {
+//           result.date = data[0] || date;
+//         } else if ( j === 1) {
+//           result.total_number_of_shares = data[1];
+//         } else if (j === 2) {
+//           result.cash_raised = data[2];
+//         } else {
+//             newOwner["investor"] = data[3];
+//             newOwner["shares"] = data[1];
+//             newOwner["cash_paid"] =data[2];
+//             newOwner["ownership"] = (newOwner["shares"] / result.total_number_of_shares)
+//             result.ownership = (newOwner);
+//         }
+
+//       }
+//     results.push(result);
+//   }
+//   let final = {
+//     "date": date,
+//     "total_number_of_shares": 0,
+//     "cash_raised": 0,
+//     "ownership": [],
+//   };
+//   for(let k = 0; k < results.length; k++) {
+//     if (results[k].date > final.date) {
+//       final.date = results[k].date
+//     }
+
+//     final.cash_raised = parseInt(final.cash_raised)+parseInt(results[k].cash_raised);
+//     final.total_number_of_shares = parseInt(final.total_number_of_shares) + parseInt(results[k].total_number_of_shares);    
+//     final.ownership.push(results[k].ownership);
+//   }
+//   return final;
+// }
 
 
   maxSelectFile = (event) => {
